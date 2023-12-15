@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>weet ni</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation.min.css" crossorigin="anonymous">
+  <style>
+    .container {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px;
+    }
+
+    .card {
+      width: 70%;
+    }
+
+    .sidebar {
+      width: 40%;
+    }
+    .stats-list {
+  list-style-type: none;
+  clear: left;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.stats-list .stats-list-positive {
+  color: #3adb76;
+}
+
+.stats-list .stats-list-negative {
+  color: #cc4b37;
+}
+
+.stats-list > li {
+  display: inline-block;
+  margin-right: 10px;
+  padding-right: 10px;
+  border-right: 1px solid #cacaca;
+  text-align: center;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.stats-list > li:last-child {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.stats-list > li .stats-list-label {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.9em;
+  font-weight: normal;
+}
+
+.bar-graph {
+  padding: 0;
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  height: 425px;
+  margin: 0;
+}
+
+.bar-graph li {
+  display: block;
+  padding: 1.5625rem 0;
+  position: relative;
+  text-align: center;
+  vertical-align: bottom;
+  border-radius: 4px 4px 0 0;
+  max-width: 20%;
+  height: 100%;
+  margin: 0 1.8% 0 0;
+  -webkit-flex: 1 1 15%;
+      -ms-flex: 1 1 15%;
+          flex: 1 1 15%;
+}
+
+.bar-graph .bar-graph-axis {
+  -webkit-flex: 1 1 8%;
+      -ms-flex: 1 1 8%;
+          flex: 1 1 8%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.bar-graph .bar-graph-label {
+  margin: 0;
+  background-color: white;
+  color: #8a8a8a;
+  position: relative;
+}
+
+@media print, screen and (min-width: 40em) {
+  .bar-graph .bar-graph-label:before, .bar-graph .bar-graph-label:after {
+    content: "";
+    position: absolute;
+    border-bottom: 1px dashed #8a8a8a;
+    top: 0;
+    left: 0;
+    height: 50%;
+    width: 20%;
+  }
+}
+
+@media print, screen and (min-width: 40em) and (min-width: 64em) {
+  .bar-graph .bar-graph-label:before, .bar-graph .bar-graph-label:after {
+    width: 30%;
+  }
+}
+
+@media print, screen and (min-width: 40em) {
+  .bar-graph .bar-graph-label:after {
+    left: auto;
+    right: 0;
+  }
+}
+
+.bar-graph .percent {
+  letter-spacing: -3px;
+  opacity: 0.4;
+  width: 100%;
+  font-size: 1.875rem;
+  position: absolute;
+}
+
+@media print, screen and (min-width: 40em) {
+  .bar-graph .percent {
+    font-size: 3.875rem;
+  }
+}
+
+.bar-graph .percent span {
+  font-size: 1.875rem;
+}
+
+.bar-graph .description {
+  font-weight: 800;
+  opacity: 0.5;
+  text-transform: uppercase;
+  width: 100%;
+  font-size: 14px;
+  bottom: 20px;
+  position: absolute;
+  font-size: 1rem;
+  overflow: hidden;
+}
+
+.bar-graph .bar.primary {
+  border: 1px solid #1779ba;
+  background: linear-gradient(#2196e3, #1779ba 70%);
+}
+
+.bar-graph .bar.secondary {
+  border: 1px solid #767676;
+  background: linear-gradient(#909090, #767676 70%);
+}
+
+.bar-graph .bar.success {
+  border: 1px solid #3adb76;
+  background: linear-gradient(#65e394, #3adb76 70%);
+}
+
+.bar-graph .bar.warning {
+  border: 1px solid #ffae00;
+  background: linear-gradient(#ffbe33, #ffae00 70%);
+}
+
+.bar-graph .bar.alert {
+  border: 1px solid #cc4b37;
+  background: linear-gradient(#d67060, #cc4b37 70%);
+}
+
+
+.status-update-input-box {
+  background-color: #fefefe;
+  padding: 1rem;
+  width: 100%;
+  border: 1px solid #cacaca;
+  box-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.18), 0 0.125rem 2px rgba(0, 0, 0, 0.36);
+}
+
+.status-update-input-box .input-box-container textarea {
+  margin-bottom: 0;
+}
+
+.status-update-input-box .input-box-container textarea:focus {
+  border: 1px solid #cacaca;
+  box-shadow: none;
+}
+
+.status-update-input-box .input-box-container textarea, .status-update-input-box .input-box-container textarea:focus {
+  border-bottom: none;
+}
+
+@media print, screen and (min-width: 40em) {
+  .status-update-input-box .user-action-container {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+.status-update-input-box .user-action-container .user-action-box {
+  padding: 0;
+  border: 1px solid #cacaca;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.status-update-input-box .user-action-container .user-action-box .action-area {
+  width: 20%;
+  border-right: 0.0625rem solid #cacaca;
+  text-align: center;
+  padding-top: 0.675rem;
+  padding-bottom: 0.675rem;
+}
+
+.status-update-input-box .user-action-container .user-action-box .action-area:last-of-type {
+  border-right: none;
+}
+
+.status-update-input-box .user-action-container .user-action-box .action-area .action-anchor.has-tip {
+  border-bottom: none;
+  cursor: pointer;
+}
+
+.status-update-input-box .user-action-container .user-action-box .action-area .action-anchor .fa {
+  color: #1779ba;
+}
+
+.status-update-input-box .user-action-container .user-submit-box {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #cacaca;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+@media screen and (max-width: 39.9375em) {
+  .status-update-input-box .user-action-container .user-submit-box {
+    border-top: none;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+@media print, screen and (min-width: 40em) {
+  .status-update-input-box .user-action-container .user-submit-box {
+    border-left: none;
+  }
+}
+
+.status-update-input-box .user-action-container .user-submit-box .button {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 39.9375em) {
+  .status-update-input-box .user-action-container .user-submit-box .button {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+}
+
+.circle-graph {
+  width: 11.25rem;
+  height: 11.25rem;
+  border-radius: 50%;
+  background-color: #8a8a8a;
+  position: relative;
+}
+
+.circle-graph.gt-50 {
+  background-color: #1779ba;
+}
+
+.circle-graph-progress {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - 5.625rem);
+  top: calc(50% - 5.625rem);
+  width: 11.25rem;
+  height: 11.25rem;
+  clip: rect(0, 11.25rem, 11.25rem, 5.625rem);
+}
+
+.circle-graph-progress .circle-graph-progress-fill {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - 5.625rem);
+  top: calc(50% - 5.625rem);
+  width: 11.25rem;
+  height: 11.25rem;
+  clip: rect(0, 5.625rem, 11.25rem, 0);
+  background: #1779ba;
+  -webkit-transform: rotate(60deg);
+      -ms-transform: rotate(60deg);
+          transform: rotate(60deg);
+}
+
+.gt-50 .circle-graph-progress {
+  clip: rect(0, 5.625rem, 11.25rem, 0);
+}
+
+.gt-50 .circle-graph-progress .circle-graph-progress-fill {
+  clip: rect(0, 11.25rem, 11.25rem, 5.625rem);
+  background: #8a8a8a;
+}
+
+.circle-graph-percents {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - 7.75862rem/2);
+  top: calc(50% - 7.75862rem/2);
+  width: 7.75862rem;
+  height: 7.75862rem;
+  background: #e6e6e6;
+  text-align: center;
+  display: table;
+  z-index: 4;
+}
+
+.circle-graph-percents .circle-graph-percents-number {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1779ba;
+}
+
+.circle-graph-percents .circle-graph-percents-units {
+  display: block;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.circle-graph-percents-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+  line-height: 0;
+}
+
+.circle-graph-percents-wrapper span {
+  line-height: 1;
+}
+
+
+
+
+  </style>
+</head>
+<body>
+    <nav class="top-bar topbar-responsive">
+        <div class="top-bar-title">
+          <span data-responsive-toggle="topbar-responsive" data-hide-for="medium">
+            <button class="menu-icon" type="button" data-toggle></button>
+          </span>
+          <a class="topbar-responsive-logo" href="#"><img src="https://assets-global.website-files.com/6433e2279fd61134d70bd465/6438bba056fc5e5d24b686db_BA%20Logo%20Primary.svg" alt="oops" height="100" width="100"></a>
+        </div>
+        </nav>
+  <div class="container">
+    <div class="card">
+      <img class="card-img" src="data:image/jpeg;base64,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" alt="header" height="700" width="700" />
+      <div class="card-info">
+        <h1 class="card-title">Maurice</h1>
+        <div class="card-icon"><br></div>
+        <p class="card-author">@BIG_M</p>
+        <ul class="stats-list">
+            <li>
+              135 <span class="stats-list-label">Commits</span>
+            </li>
+            <li class="stats-list-positive">
+              17,678 <span class="stats-list-label">Additions</span>
+            </li>
+            <li class="stats-list-negative">
+              2,390 <span class="stats-list-label">Deletions</span>
+            </li>
+          </ul>
+                    
+      </div>
+    </div>
+    
+
+    <div class="sidebar">
+        <h2>DATA</h2>
+
+<ul class="bar-graph">
+    <li class="bar-graph-axis">
+      <div class="bar-graph-label">100%</div>
+      <div class="bar-graph-label">80%</div>
+      <div class="bar-graph-label">60%</div>
+      <div class="bar-graph-label">40%</div>
+      <div class="bar-graph-label">20%</div>
+      <div class="bar-graph-label">0%</div>
+    </li>
+    <li class="bar primary" style="height: 95%;" title="95">
+      <div class="percent">95<span>%</span></div>
+      <div class="description">water</div>
+    </li>
+    <li class="bar secondary" style="height: 90%;" title="90">
+      <div class="percent">90<span>%</span></div>
+      <div class="description">lucht</div>
+    </li>
+    <li class="bar success" style="height: 80%;" title="80">
+      <div class="percent">80<span>%</span></div>
+      <div class="description">aarde</div>
+    </li>
+    <li class="bar warning" style="height: 75%;" title="75">
+      <div class="percent">75<span>%</span></div>
+      <div class="description">vuur</div>
+    </li>
+    <li class="bar alert" style="height: 40%;" title="40">
+      <div class="percent">40<span>%</span></div>
+      <div class="description">wie weet</div>
+    </li>
+  </ul>
+  <br>
+  <div class="circle-graph" data-circle-graph data-percent="50">
+    <div class="circle-graph-progress">
+      <div class="circle-graph-progress-fill"></div>
+    </div>
+    <div class="circle-graph-percents">
+      <div class="circle-graph-percents-wrapper">
+        <span class="circle-graph-percents-number"></span>
+        <span class="circle-graph-percents-units">koekjes</span>
+      </div>
+    </div>
+  </div>
+  
+  
+
+  
+    </div>
+  </div>
+  <div class="status-update-input-box">
+    <form>
+      <div class="row input-box-container">
+        <div class="columns">
+          <label> 
+            <textarea rows="5" placeholder="zet hier wat je verandert wil"></textarea>
+          </label>
+        </div>
+      </div>
+      <div class="row medium-collapse user-action-container">
+        <div class="small-12 medium-7 columns">
+          <div class="user-action-box">
+            <div class="action-area">
+              <a href="#" class="action-anchor has-tip bottom" data-tooltip aria-haspopup="true" data-disable-hover="false" tabindex="2" title="Upload a Photo">
+                <i class="fa fa-picture-o" aria-hidden="true"></i>
+                <span class="show-for-sr">Upload a Photo</span>
+              </a>
+            </div>
+            <div class="action-area">
+              <a href="#" class="action-anchor has-tip bottom" data-tooltip aria-haspopup="true" data-disable-hover="false" tabindex="2" title="Upload a Video">
+                <i class="fa fa-video-camera" aria-hidden="true"></i>
+                <span class="show-for-sr">Upload a Video</span>
+              </a>
+            </div>
+            <div class="action-area">
+              <a href="#" class="action-anchor has-tip bottom" data-tooltip aria-haspopup="true" data-disable-hover="false" tabindex="2" title="Check in">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span class="show-for-sr">Check in</span>
+              </a>
+            </div>
+            <div class="action-area">
+              <a href="#" class="action-anchor has-tip bottom" data-tooltip aria-haspopup="true" data-disable-hover="false" tabindex="2" title="Add a Feeling">
+                <i class="fa fa-smile-o" aria-hidden="true"></i>
+                <span class="show-for-sr">Add a Feeling</span>
+              </a>
+            </div>
+            <div class="action-area">
+              <a href="#" class="action-anchor has-tip bottom" data-tooltip aria-haspopup="true" data-disable-hover="false" tabindex="2" title="Tag a Friend">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+                <span class="show-for-sr">Tag a Friend</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="small-12 medium-5 columns">
+          <div class="user-submit-box">
+            <input type="submit" class="button small" value="POST">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/js/foundation.min.js" crossorigin="anonymous"></script>
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/vendor/what-input.js"></script>
+  <script src="js/vendor/foundation.min.js"></script>
+  <script>
+    $("[data-circle-graph]").each(function() {
+  var $graph = $(this),
+      percent = parseInt($graph.data('percent'), 10),
+      deg = 360*percent/100;
+  if(percent > 50) {
+    $graph.addClass('gt-50');
+  }
+  $graph.find('.circle-graph-progress-fill').css('transform','rotate('+ deg +'deg)');
+  $graph.find('.circle-graph-percents-number').html(percent+'%');
+});
+
+
+  </script>
+  
+  <script>
+    $(document).foundation();
+  </script>
+
+</body>
+</html>
+
